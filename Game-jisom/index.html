@@ -1,0 +1,127 @@
+<html lang="pt-br">
+ <head>
+     <meta charset="utf-8">
+     <title>Interface Linguagem XXT</title>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">    
+     <style>
+         .fa{
+             font-size: 50px;
+         }
+     </style>
+</head>
+ <body>
+    <div class="container" style="text-align: center;">
+        <h1>Interface para o interpretador da Linguagem XXT</h1>
+        <hr>
+        <div class="card">
+            <div class="card-header">
+                <div class="row" style="text-align: start; font-weight: bold;">
+                    <div class="col-md-6">
+                        CONSOLE:      
+                    </div>
+                    <div class="col-md-6">
+                         SAÍDA: 
+                    </div>
+                </div>         
+            </div>
+            <div class="card-body">
+                <div class="row">
+                        <div class="col-md-6">
+                             <textarea class="form-control" style="height: 396;" placeholder="Digite aqui" id="entrada"></textarea>
+                             <p class="text-muted" style="text-align: start; margin-bottom: 0px;">*Pressione a tecla ENTER para enviar o CMD</p>
+                             <div class="row">
+                                 <div class="col-md-12" style="text-align: end;">
+                                        <i class="fa fa-caret-square-o-up" style="display: block; margin-right: 42px; margin-bottom: -6px;" id="cima"></i>
+                                        <i class="fa fa-caret-square-o-left" id="esquerda"></i><i class="fa fa-caret-square-o-down" id="baixo"></i><i class="fa fa-caret-square-o-right" id="direita"></i>
+                                 </div>
+                             </div>
+                        </div>
+                        <div class="col-md-6" style="text-align: start;">
+                            <canvas id="myCanvas" width="510" height="510">Browser não oferece suporte à Canvas.</canvas>
+                        </div>
+                </div>
+                <p class="text-muted" style="margin-top: 70px; margin-bottom: -15px; text-align: start;">Saída JISON:</p>
+                <hr>
+                <div class="row"> 
+                    <div class="col-md-12" style="text-align: start;">
+                        <div id="saidaJISON" style="font-size: 12px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Não há entrada.</div>
+                    </div>
+                </div>
+                
+              
+            </div>
+        </div>
+
+    </div>
+ </body>
+ <script src="canvas.js"></script>
+ <script src="game.js"></script>
+ <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+ <script> 
+     function interpretar(entrada) {
+         if (entrada != '') {
+             try {
+                 console.log("Entrad CMD: " + entrada);
+                var resultado = game.parse(entrada);
+                $('#saidaJISON').html(resultado);
+             } catch (e) {
+                $('#saidaJISON').html(String(e));
+             }
+         }
+     }
+
+
+     $(document).ready(function(){
+        $("#entrada").focus()
+        canvas()
+        $("#entrada").keypress(ref=>{
+            if(ref.which == 13) {
+               try{
+                   var c = $("#entrada").val().toLowerCase().split('\n')
+                   interpretar(c[c.length-1]); 
+               }catch(e){}
+            }
+        })
+
+        var preencheConsole = (data)=>{
+            var textoArea = $("#entrada").val()
+            if(!textoArea)
+                $("#entrada").val(data)
+            else{
+                var c = $("#entrada").val().toLowerCase().split('\n')
+                var aux = ""
+                c.forEach(e=>{               
+                    aux += e + "\n"
+                })
+                $("#entrada").val(aux + data)
+            }    
+                
+        }
+
+        $('#cima').click(()=>{
+            interpretar('cima')
+            preencheConsole('cima')
+        })
+        $('#baixo').click(()=>{
+            interpretar('baixo')
+            preencheConsole('baixo')
+        })
+        $('#esquerda').click(()=>{
+            interpretar('esquerda')
+            preencheConsole('esquerda')
+        })
+        $('#direita').click(()=>{
+            interpretar('direita')
+            preencheConsole('direita')
+        })
+
+   
+
+
+        $("#limparConsole").click(()=>{
+            $('#entrada').val('')
+        })
+     });
+ </script>
+</html>
