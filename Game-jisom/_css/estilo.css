@@ -1,0 +1,77 @@
+@charset "UTF-8";
+@font-face{
+  font-family: 'FonteLogo';
+  src: url("../_fonts/TRANSISTOR215.TTF");
+}
+@font-face{
+  font-family: 'FonteMsDos';
+  src: url("../_fonts/FSEX300.ttf");
+}
+
+body{
+  font-family: Arial, sans-serif;
+  background-color: #ddd;
+  color: rgba(0, 0, 0, 1)
+}
+
+div#interface{
+  background-color: #fff; 
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+div#cabecalho{
+  height: 150px;
+}
+
+div#cabecalho h1{
+  font-family: 'FonteLogo', sans-serif;
+  font-size: 40pt;
+  color: #606060;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, .6);
+  padding-top: 20px; 
+}
+
+/*  Menu */
+nav#menu{
+  display: block;
+}
+
+nav#menu ul {
+  list-style: none;
+  text-transform: uppercase;
+  position: relative;
+  top: 10px;
+  left: -40px;
+}
+
+nav#menu li {
+  display: inline-block;
+  background: #ddd;
+  padding: 10px;
+  margin: 2px;
+}
+
+nav#menu li:houver{
+  background-color: #606060;
+  transition: background-color 1s; 
+}
+
+nav#menu a {
+  color: #000000;
+  text-decoration: none;
+}
+
+nav#menu a:hover {
+  color: #ffffff;
+}
+
+
+div#saidaJISON{
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  margin-top: -10px;
+  padding: 10px;
+  height: 120px;
+  font-size: 22px; 
+  font-family: 'FonteMsDos', sans-serif;
+}

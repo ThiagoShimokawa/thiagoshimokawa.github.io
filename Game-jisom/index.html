@@ -1,20 +1,29 @@
+<!DOCTYPE html>
 <html lang="pt-br">
  <head>
-     <meta charset="utf-8">
-     <title>Interface Linguagem XXT</title>
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">    
-     <style>
-         .fa{
-             font-size: 50px;
-         }
-     </style>
+    <meta charset="utf-8">
+    <title>Interface Linguagem XXT</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="STYLESHEET" href="_css/estilo.css"
 </head>
  <body>
-    <div class="container" style="text-align: center;">
-        <h1>Interface para o interpretador da Linguagem XXT</h1>
-        <hr>
-        <div class="card">
+    <div class="container" id="interface">
+        <div class="row">
+            <div class="col-md-12" id="cabecalho">
+                <h1>Compiladores</h1>
+                <nav id="menu">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="gramatica.html">Gramática</a></li>
+                        <li><a href="sobre.html">Sobre nós</a></li>
+                    </ul>
+                </nav>
+            </div>
+            
+        </div>
+
+        <div class="card" id="corpo">
             <div class="card-header">
                 <div class="row" style="text-align: start; font-weight: bold;">
                     <div class="col-md-6">
@@ -27,39 +36,71 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                        <div class="col-md-6">
-                             <textarea class="form-control" style="height: 396;" placeholder="Digite aqui" id="entrada"></textarea>
-                             <p class="text-muted" style="text-align: start; margin-bottom: 0px;">*Pressione a tecla ENTER para enviar o CMD</p>
-                             <div class="row">
-                                 <div class="col-md-12" style="text-align: end;">
-                                        <i class="fa fa-caret-square-o-up" style="display: block; margin-right: 42px; margin-bottom: -6px;" id="cima"></i>
-                                        <i class="fa fa-caret-square-o-left" id="esquerda"></i><i class="fa fa-caret-square-o-down" id="baixo"></i><i class="fa fa-caret-square-o-right" id="direita"></i>
-                                 </div>
-                             </div>
-                        </div>
-                        <div class="col-md-6" style="text-align: start;">
-                            <canvas id="myCanvas" width="510" height="510">Browser não oferece suporte à Canvas.</canvas>
-                        </div>
-                </div>
-                <p class="text-muted" style="margin-top: 70px; margin-bottom: -15px; text-align: start;">Saída JISON:</p>
+                    <div class="col-md-6 col-lg-6 col-sm-6">
+                        <nav style="margin-bottom: 10px;">
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Blocos</a>
+                                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Texto</a>
+                            </div>
+                        </nav>
+						
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                
+								<!-- Div vazia em que os blocos vão aparecer.........................-->
+								<div id="blocklyDiv" style="height: 420px; width: 100%;"></div>
+                                                
+                                <xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
+                                    <block type="movimeto"></block>
+                                    <block type="marcar"></block>
+                                    <block type="inicio"></block>
+                                    <block type="tnt"></block>
+                                    <block type="tijolo"></block>
+                                    <block type="pedra"></block>
+                                    <block type="gelo"></block>
+                                </xml>
+
+                                <xml xmlns="http://www.w3.org/1999/xhtml" id="workspaceBlocks" style="display:none"></xml>
+
+                                <button class="btn btn-danger" style="margin-top: 2px; width: 189px;" id="construir"><i class="fa fa-caret-square-o-right"></i> Play</button> 
+                            </div>
+							
+                            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+								<textarea class="form-control" rows="17" style="resize: none;" placeholder="Digite aqui" id="entrada"></textarea>
+                                <p class="text-muted" style="text-align: start; margin-bottom: 0px;">*Pressione a tecla ENTER para enviar o CMD</p>
+                            </div>
+						</div>  
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-sm-6" style="text-align: start;">
+                        <canvas id="myCanvas" width="510" height="510">Browser não oferece suporte à Canvas.</canvas>
+                    </div>
+				</div>
+
+                <p class="text-muted" style="margin-top: 20px; margin-bottom: -15px; text-align: start;">Saída JISON:</p>
                 <hr>
                 <div class="row"> 
                     <div class="col-md-12" style="text-align: start;">
-                        <div id="saidaJISON" style="font-size: 12px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Não há entrada.</div>
+                        <div id="saidaJISON">Não há entrada.</div>
                     </div>
                 </div>
-                
-              
             </div>
         </div>
 
     </div>
  </body>
- <script src="canvas.js"></script>
- <script src="game.js"></script>
+ <script src="_javascript/canvas.js"></script>
+ <script src="_javascript/game.js"></script>
  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+ 
+ <!--   Blocos..........................................-->
+ <script src="_blocos/blockly_compressed.js"> </script> 
+ <script src="_blocos/blocks_compressed.js"> </script> 
+ <script src="_blocos/javascript_compressed.js"></script>
+ <script src="_blocos/pt-br.js"></script>
+ <script src="_blocos/blocos.js"></script>
  <script> 
-     function interpretar(entrada) {
+    function interpretar(entrada) {
          if (entrada != '') {
              try {
                  console.log("Entrad CMD: " + entrada);
@@ -69,8 +110,25 @@
                 $('#saidaJISON').html(String(e));
              }
          }
-     }
+    }
 
+    function processarCMD(entrada) {
+        if(entrada != ''){
+            entrada.forEach(function(cmd) {
+                var resultado = game.parse(cmd);
+                $('#saidaJISON').html(resultado);
+        }, this);
+        }
+    }
+
+    function sleep(milliseconds) {
+        var start = new Date().getTime();
+        for (var i = 0; i < 1e7; i++) {
+            if ((new Date().getTime() - start) > milliseconds){
+            break;
+        }
+    }
+}
 
      $(document).ready(function(){
         $("#entrada").focus()
@@ -84,43 +142,15 @@
             }
         })
 
-        var preencheConsole = (data)=>{
-            var textoArea = $("#entrada").val()
-            if(!textoArea)
-                $("#entrada").val(data)
-            else{
-                var c = $("#entrada").val().toLowerCase().split('\n')
-                var aux = ""
-                c.forEach(e=>{               
-                    aux += e + "\n"
-                })
-                $("#entrada").val(aux + data)
-            }    
-                
-        }
-
-        $('#cima').click(()=>{
-            interpretar('cima')
-            preencheConsole('cima')
-        })
-        $('#baixo').click(()=>{
-            interpretar('baixo')
-            preencheConsole('baixo')
-        })
-        $('#esquerda').click(()=>{
-            interpretar('esquerda')
-            preencheConsole('esquerda')
-        })
-        $('#direita').click(()=>{
-            interpretar('direita')
-            preencheConsole('direita')
-        })
-
-   
-
-
         $("#limparConsole").click(()=>{
             $('#entrada').val('')
+        })
+
+        $('#construir').click(()=>{
+            //AQUI DENTRO PODE CHAMAR UMA FUNÇÃO DO ARQUIVO BLOCOS.JS EM SEGUIDA "LER" OS COMANDOS DOS BLOCOS E APÓS USAR A GRÁMATICA PRA DESENHAR
+            var cmd = $("#entrada").val().toLowerCase().split('\n')
+            processarCMD(cmd);
+            console.log("play")
         })
      });
  </script>

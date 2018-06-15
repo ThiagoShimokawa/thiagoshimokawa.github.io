@@ -13,30 +13,40 @@
       
       /*  Cursor .......................... */
       var imgCursor = new Image();
-      imgCursor.src = "img/mira.fw.png";
+      imgCursor.src = "_imagens/mira.fw.png";
       imgCursor = imgCursor;
 
       /*  Fundo .......................... */
       var imgFundo = new Image();
-      imgFundo.src = "img/fundo.fw.png";
+      imgFundo.src = "_imagens/fundo.fw.png";
       imgFundo = imgFundo;
 
       /*  Parede .......................... */
-      var imgParede = new Image();
-      imgParede.src = "img/tijolo.fw.png";
-      imgParede = imgParede;
+      var imgTijolo = new Image();
+      imgTijolo.src = "_imagens/tijolo.fw.png";
+      imgTijolo = imgTijolo;
 
       /*  Pedra .......................... */
       var imgPedra = new Image();
-      imgPedra.src = "img/pedra.fw.png";
+      imgPedra.src = "_imagens/pedra.fw.png";
       imgPedra = imgPedra;
+
+      /*  TNT .......................... */
+      var imgTNT = new Image();
+      imgTNT.src = "_imagens/tnt.fw.png";
+      imgTNT = imgTNT;
+
+      /*  Gelo .......................... */
+      var imgGelo = new Image();
+      imgGelo.src = "_imagens/gelo.fw.png";
+      imgGelo = imgGelo;
       
 
       function obstaculoPadrao(){
         obstaculos = [
-          { x: 150, y: 60, tipo: 'parede' },
-          { x: 150, y: 90, tipo: 'parede' },
-          { x: 150, y: 120, tipo: 'parede' },
+          { x: 150, y: 60, tipo: 'tijolo' },
+          { x: 150, y: 90, tipo: 'tijolo' },
+          { x: 150, y: 120, tipo: 'tijolo' },
           { x: 150, y: 150, tipo: 'pedra' },
           { x: 180, y: 150, tipo: 'pedra' }
         ];
@@ -63,11 +73,18 @@
 
        function desenhaParede() {
         obstaculos.forEach(function(pos) {
-          if(pos.tipo == 'parede')
-            ctx.drawImage(imgParede, pos.x, pos.y);
+          if(pos.tipo == 'tijolo')
+            ctx.drawImage(imgTijolo, pos.x, pos.y);
 
-          if(pos.tipo == 'pedra')
+          else if(pos.tipo == 'pedra')
             ctx.drawImage(imgPedra, pos.x, pos.y);
+
+          else if(pos.tipo == 'tnt')
+            ctx.drawImage(imgTNT, pos.x, pos.y);
+
+          else if(pos.tipo == 'gelo')
+            ctx.drawImage(imgGelo, pos.x, pos.y);
+          
         }, this);
       }
 
@@ -152,7 +169,7 @@
 
       function _controles(evt) {
         switch (evt.keyCode) {
-
+ 
           // Left 
         case 37:
           canvasDraw('esquerda')

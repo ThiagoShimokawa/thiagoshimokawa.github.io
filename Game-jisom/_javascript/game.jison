@@ -13,8 +13,13 @@
 "resetar"             return 'RESETAR'
 "marcar"              return 'MARCAR'
 "pedra"               return 'PEDRA'
-"parede"              return 'PAREDE'
+"tijolo"              return 'TIJOLO'
+"tnt"                 return 'TNT'
+"gelo"                return 'GELO'
 "mover"               return 'MOVER'
+"("                   return '('
+")"                   return ')'
+";"                   return 'TERMINADOR'
 <<EOF>>               return 'EOF'
 .                     return 'INVALID'
 
@@ -58,23 +63,31 @@ e
         {{
             $$ = resetarCanvas();
         }}
-    | MARCAR e
+    | MARCAR '(' e ')' TERMINADOR
         {{
-            $$ = marcarDraw($2);
+            $$ = marcarDraw($3);
         }}
-    | PAREDE
+    | TIJOLO
         {{
-            $$ = "parede";
+            $$ = "tijolo";
         }}
     | PEDRA
         {{
             $$ = "pedra";
         }}
-    | MOVER e
+    | TNT
+        {{
+            $$ = "tnt";
+        }}
+    | GELO
+        {{
+            $$ = "gelo";
+        }}
+    | MOVER e TERMINADOR
         {{
             $$ = canvasDraw($2, 1);
         }}
-    | MOVER e NUMBER
+    | MOVER e NUMBER TERMINADOR
         {{
             $$ = canvasDraw($2, $3);
         }}

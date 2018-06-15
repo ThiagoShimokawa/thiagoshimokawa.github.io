@@ -609,34 +609,44 @@ options: {
 symbols_: {
   "$accept": 0,
   "$end": 1,
-  "BAIXO": 6,
-  "CIMA": 5,
-  "DIREITA": 3,
+  "(": 3,
+  ")": 4,
+  "BAIXO": 8,
+  "CIMA": 7,
+  "DIREITA": 5,
   "EOF": 1,
-  "ESQUERDA": 4,
-  "MARCAR": 9,
-  "MOVER": 12,
-  "NUMBER": 7,
-  "PAREDE": 10,
-  "PEDRA": 11,
-  "RESETAR": 8,
-  "e": 14,
+  "ESQUERDA": 6,
+  "GELO": 16,
+  "MARCAR": 11,
+  "MOVER": 17,
+  "NUMBER": 9,
+  "PEDRA": 14,
+  "RESETAR": 10,
+  "TERMINADOR": 12,
+  "TIJOLO": 13,
+  "TNT": 15,
+  "e": 19,
   "error": 2,
-  "expressions": 13
+  "expressions": 18
 },
 terminals_: {
   1: "EOF",
   2: "error",
-  3: "DIREITA",
-  4: "ESQUERDA",
-  5: "CIMA",
-  6: "BAIXO",
-  7: "NUMBER",
-  8: "RESETAR",
-  9: "MARCAR",
-  10: "PAREDE",
-  11: "PEDRA",
-  12: "MOVER"
+  3: "(",
+  4: ")",
+  5: "DIREITA",
+  6: "ESQUERDA",
+  7: "CIMA",
+  8: "BAIXO",
+  9: "NUMBER",
+  10: "RESETAR",
+  11: "MARCAR",
+  12: "TERMINADOR",
+  13: "TIJOLO",
+  14: "PEDRA",
+  15: "TNT",
+  16: "GELO",
+  17: "MOVER"
 },
 TERROR: 2,
     EOF: 1,
@@ -742,18 +752,19 @@ TERROR: 2,
     },
 productions_: bp({
   pop: u([
-  13,
+  18,
   s,
-  [14, 11]
+  [19, 13]
 ]),
   rule: u([
   2,
   s,
   [1, 6],
-  c,
-  [7, 3],
-  2,
-  3
+  5,
+  s,
+  [1, 4],
+  3,
+  4
 ])
 }),
 performAction: function parser__PerformAction(yytext, yystate /* action[1] */, yysp, yyvstack) {
@@ -812,15 +823,15 @@ case 7:
     break;
 
 case 8:
-    /*! Production::    e : MARCAR e */
+    /*! Production::    e : MARCAR "(" e ")" TERMINADOR */
 
-    this.$ = marcarDraw(yyvstack[yysp]);
+    this.$ = marcarDraw(yyvstack[yysp - 2]);
     break;
 
 case 9:
-    /*! Production::    e : PAREDE */
+    /*! Production::    e : TIJOLO */
 
-    this.$ = "parede";
+    this.$ = "tijolo";
     break;
 
 case 10:
@@ -830,98 +841,124 @@ case 10:
     break;
 
 case 11:
-    /*! Production::    e : MOVER e */
+    /*! Production::    e : TNT */
 
-    this.$ = canvasDraw(yyvstack[yysp], 1);
+    this.$ = "tnt";
     break;
 
 case 12:
-    /*! Production::    e : MOVER e NUMBER */
+    /*! Production::    e : GELO */
 
-    this.$ = canvasDraw(yyvstack[yysp - 1], yyvstack[yysp]);
+    this.$ = "gelo";
+    break;
+
+case 13:
+    /*! Production::    e : MOVER e TERMINADOR */
+
+    this.$ = canvasDraw(yyvstack[yysp - 1], 1);
+    break;
+
+case 14:
+    /*! Production::    e : MOVER e NUMBER TERMINADOR */
+
+    this.$ = canvasDraw(yyvstack[yysp - 2], yyvstack[yysp - 1]);
     break;
 
 }
 },
 table: bt({
   len: u([
-  12,
+  14,
   1,
   1,
   s,
   [0, 6],
-  11,
   c,
-  [3, 5],
+  [7, 5],
+  13,
+  0,
+  13,
   2,
-  0
+  1,
+  0,
+  c,
+  [19, 4]
 ]),
   symbol: u([
   s,
-  [3, 12, 1],
+  [5, 7, 1],
+  s,
+  [13, 7, 1],
   1,
   1,
+  3,
   c,
-  [14, 10],
-  14,
+  [17, 12],
+  19,
   c,
-  [11, 11],
-  1,
-  7
+  [13, 13],
+  9,
+  12,
+  4,
+  12,
+  12
 ]),
   type: u([
   s,
-  [2, 10],
+  [2, 12],
   0,
   0,
   1,
   s,
-  [2, 11],
+  [2, 14],
   0,
   c,
-  [11, 13]
+  [13, 18]
 ]),
   state: u([
   1,
   2,
-  14,
-  15
+  17,
+  18
 ]),
   mode: u([
   s,
-  [1, 31],
-  2,
-  1
+  [1, 43]
 ]),
   goto: u([
   s,
-  [3, 11, 1],
+  [3, 14, 1],
   c,
-  [11, 10],
+  [14, 12],
   c,
-  [10, 10],
-  11,
-  16
+  [12, 12],
+  20,
+  19,
+  21,
+  22,
+  23
 ])
 }),
 defaultActions: bda({
   idx: u([
   s,
   [3, 6, 1],
-  10,
-  11,
-  13,
-  14,
-  16
+  s,
+  [10, 4, 1],
+  15,
+  19,
+  22,
+  23
 ]),
   goto: u([
   s,
   [2, 6, 1],
-  9,
-  10,
+  s,
+  [9, 4, 1],
   1,
-  8,
-  12
+  13,
+  14,
+  8
 ])
 }),
 parseError: function parseError(str, hash, ExceptionClass) {
@@ -961,7 +998,7 @@ parse: function parse(input) {
     var TERROR = this.TERROR;
     var EOF = this.EOF;
     var ERROR_RECOVERY_TOKEN_DISCARD_COUNT = (this.options.errorRecoveryTokenDiscardCount | 0) || 3;
-    var NO_ACTION = [0, 17 /* === table.length :: ensures that anyone using this new state will fail dramatically! */];
+    var NO_ACTION = [0, 24 /* === table.length :: ensures that anyone using this new state will fail dramatically! */];
 
     var lexer;
     if (this.__lexer__) {
@@ -3273,51 +3310,71 @@ EOF: 1,
     simpleCaseActionClusters: {
       /*! Conditions:: INITIAL */
       /*! Rule::       [0-9]+ */
-      1: 7,
+      1: 9,
 
       /*! Conditions:: INITIAL */
       /*! Rule::       direita */
-      2: 3,
+      2: 5,
 
       /*! Conditions:: INITIAL */
       /*! Rule::       esquerda */
-      3: 4,
+      3: 6,
 
       /*! Conditions:: INITIAL */
       /*! Rule::       cima */
-      4: 5,
+      4: 7,
 
       /*! Conditions:: INITIAL */
       /*! Rule::       baixo */
-      5: 6,
+      5: 8,
 
       /*! Conditions:: INITIAL */
       /*! Rule::       resetar */
-      6: 8,
+      6: 10,
 
       /*! Conditions:: INITIAL */
       /*! Rule::       marcar */
-      7: 9,
+      7: 11,
 
       /*! Conditions:: INITIAL */
       /*! Rule::       pedra */
-      8: 11,
+      8: 14,
 
       /*! Conditions:: INITIAL */
-      /*! Rule::       parede */
-      9: 10,
+      /*! Rule::       tijolo */
+      9: 13,
+
+      /*! Conditions:: INITIAL */
+      /*! Rule::       tnt */
+      10: 15,
+
+      /*! Conditions:: INITIAL */
+      /*! Rule::       gelo */
+      11: 16,
 
       /*! Conditions:: INITIAL */
       /*! Rule::       mover */
-      10: 12,
+      12: 17,
+
+      /*! Conditions:: INITIAL */
+      /*! Rule::       \( */
+      13: 3,
+
+      /*! Conditions:: INITIAL */
+      /*! Rule::       \) */
+      14: 4,
+
+      /*! Conditions:: INITIAL */
+      /*! Rule::       ; */
+      15: 12,
 
       /*! Conditions:: INITIAL */
       /*! Rule::       $ */
-      11: 1,
+      16: 1,
 
       /*! Conditions:: INITIAL */
       /*! Rule::       . */
-      12: 'INVALID'
+      17: 'INVALID'
     },
 
     rules: [
@@ -3330,15 +3387,20 @@ EOF: 1,
       /*  6: */  /^(?:resetar)/,
       /*  7: */  /^(?:marcar)/,
       /*  8: */  /^(?:pedra)/,
-      /*  9: */  /^(?:parede)/,
-      /* 10: */  /^(?:mover)/,
-      /* 11: */  /^(?:$)/,
-      /* 12: */  /^(?:.)/
+      /*  9: */  /^(?:tijolo)/,
+      /* 10: */  /^(?:tnt)/,
+      /* 11: */  /^(?:gelo)/,
+      /* 12: */  /^(?:mover)/,
+      /* 13: */  /^(?:\()/,
+      /* 14: */  /^(?:\))/,
+      /* 15: */  /^(?:;)/,
+      /* 16: */  /^(?:$)/,
+      /* 17: */  /^(?:.)/
     ],
 
     conditions: {
       'INITIAL': {
-        rules: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        rules: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
         inclusive: true
       }
     }
