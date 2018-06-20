@@ -13,32 +13,32 @@
       
       /*  Cursor .......................... */
       var imgCursor = new Image();
-      imgCursor.src = "_imagens/pa.fw.png";
+      imgCursor.src = "imagens/pa.fw.png";
       imgCursor = imgCursor;
 
       /*  Fundo .......................... */
       var imgFundo = new Image();
-      imgFundo.src = "_imagens/fundo.fw.png";
+      imgFundo.src = "imagens/fundo.fw.png";
       imgFundo = imgFundo;
 
       /*  Parede .......................... */
       var imgTijolo = new Image();
-      imgTijolo.src = "_imagens/tijolo.fw.png";
+      imgTijolo.src = "imagens/tijolo.fw.png";
       imgTijolo = imgTijolo;
 
       /*  Pedra .......................... */
       var imgPedra = new Image();
-      imgPedra.src = "_imagens/pedra.fw.png";
+      imgPedra.src = "imagens/pedra.fw.png";
       imgPedra = imgPedra;
 
       /*  TNT .......................... */
       var imgTNT = new Image();
-      imgTNT.src = "_imagens/tnt.fw.png";
+      imgTNT.src = "imagens/tnt.fw.png";
       imgTNT = imgTNT;
 
       /*  Gelo .......................... */
       var imgGelo = new Image();
-      imgGelo.src = "_imagens/gelo.fw.png";
+      imgGelo.src = "imagens/gelo.fw.png";
       imgGelo = imgGelo;
       
 

@@ -158,7 +158,7 @@
     // TODO: Assemble JavaScript into code variable.
     var code = 'marcar'+ value_name +';\n';
     return code;
-    console.log(value_name)
+    //console.log(value_name)
   };
 
   /* Inject your workspace */ 
