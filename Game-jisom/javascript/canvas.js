@@ -161,7 +161,7 @@
 
       function resetarCanvas(){
         $("#entrada").val('');
-        cursor_eixo_X = cursor_eixo_Y = 30;
+        cursor_eixo_X = cursor_eixo_Y = 240;
         obstaculos = [];
         //obstaculoPadrao();
       }
