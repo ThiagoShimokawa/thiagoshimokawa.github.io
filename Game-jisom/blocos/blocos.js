@@ -158,7 +158,7 @@
     // TODO: Assemble JavaScript into code variable.
     var code = 'marcar'+ value_name +';\n';
     return code;
-    //console.log(value_name)
+    //sconsole.log(value_name)
   };
 
   /* Inject your workspace */ 
@@ -184,6 +184,6 @@
     var code = Blockly.JavaScript.workspaceToCode(workspace);
     //alert(code);
     document.getElementById("entrada").value = code;
-    console.log("blocos")
+    console.log("blocos");
   }
   workspace.addChangeListener(onFirstComment);
