@@ -5,7 +5,6 @@
 %%
 
 \s+                   /* skip whitespace */
-[0-9]+                return 'NUMBER'
 "direita"             return 'DIREITA'
 "esquerda"            return 'ESQUERDA'
 "cima"                return 'CIMA'
@@ -39,56 +38,40 @@ expressions
     ;
 
 e
-    : DIREITA
-        {{
-           $$ = $1;   
-        }}  
-    | ESQUERDA
-        {{
-           $$ = $1;   
-        }} 
-    | CIMA
-        {{
-           $$ = $1;   
-        }}  
-    | BAIXO
-        {{
-           $$ = $1;   
-        }}
-    | NUMBER
-        {{
-           {$$ = Number(yytext);}
-        }}
-    | RESETAR
+    : RESETAR TERMINADOR
         {{
             $$ = resetarCanvas();
         }}
-    | MARCAR '(' e ')' TERMINADOR
+    | MARCAR '(' TIJOLO ')' TERMINADOR
         {{
             $$ = marcarDraw($3);
         }}
-    | TIJOLO
+    | MARCAR '(' PEDRA ')' TERMINADOR
         {{
-            $$ = "tijolo";
+            $$ = marcarDraw($3);
         }}
-    | PEDRA
+    | MARCAR '(' TNT ')' TERMINADOR
         {{
-            $$ = "pedra";
+            $$ = marcarDraw($3);
         }}
-    | TNT
+    | MARCAR '(' GELO ')' TERMINADOR
         {{
-            $$ = "tnt";
+            $$ = marcarDraw($3);
         }}
-    | GELO
+    | MOVER CIMA TERMINADOR
         {{
-            $$ = "gelo";
+            $$ = canvasDraw($2);
         }}
-    | MOVER e TERMINADOR
+    | MOVER DIREITA TERMINADOR
         {{
-            $$ = canvasDraw($2, 1);
+            $$ = canvasDraw($2);
         }}
-    | MOVER e NUMBER TERMINADOR
+    | MOVER BAIXO TERMINADOR
         {{
-            $$ = canvasDraw($2, $3);
+            $$ = canvasDraw($2);
+        }}
+    | MOVER ESQUERDA TERMINADOR
+        {{
+            $$ = canvasDraw($2);
         }}
     ;

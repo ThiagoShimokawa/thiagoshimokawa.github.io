@@ -183,6 +183,7 @@
     Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
     var code = Blockly.JavaScript.workspaceToCode(workspace);
     //alert(code);
-    document.getElementById("entrada").innerHTML = code;
+    document.getElementById("entrada").value = code;
+    console.log("blocos")
   }
   workspace.addChangeListener(onFirstComment);

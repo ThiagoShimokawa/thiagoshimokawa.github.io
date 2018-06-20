@@ -577,7 +577,7 @@ var parser = {
     //   .................................. false
     //   uses yyleng: ..................... false
     //   uses yylineno: ................... false
-    //   uses yytext: ..................... true
+    //   uses yytext: ..................... false
     //   uses yylloc: ..................... false
     //   uses ParseError API: ............. false
     //   uses YYERROR: .................... false
@@ -611,42 +611,40 @@ symbols_: {
   "$end": 1,
   "(": 3,
   ")": 4,
-  "BAIXO": 8,
-  "CIMA": 7,
-  "DIREITA": 5,
+  "BAIXO": 15,
+  "CIMA": 13,
+  "DIREITA": 14,
   "EOF": 1,
-  "ESQUERDA": 6,
-  "GELO": 16,
-  "MARCAR": 11,
-  "MOVER": 17,
-  "NUMBER": 9,
-  "PEDRA": 14,
-  "RESETAR": 10,
-  "TERMINADOR": 12,
-  "TIJOLO": 13,
-  "TNT": 15,
-  "e": 19,
+  "ESQUERDA": 16,
+  "GELO": 11,
+  "MARCAR": 7,
+  "MOVER": 12,
+  "PEDRA": 9,
+  "RESETAR": 5,
+  "TERMINADOR": 6,
+  "TIJOLO": 8,
+  "TNT": 10,
+  "e": 18,
   "error": 2,
-  "expressions": 18
+  "expressions": 17
 },
 terminals_: {
   1: "EOF",
   2: "error",
   3: "(",
   4: ")",
-  5: "DIREITA",
-  6: "ESQUERDA",
-  7: "CIMA",
-  8: "BAIXO",
-  9: "NUMBER",
-  10: "RESETAR",
-  11: "MARCAR",
-  12: "TERMINADOR",
-  13: "TIJOLO",
-  14: "PEDRA",
-  15: "TNT",
-  16: "GELO",
-  17: "MOVER"
+  5: "RESETAR",
+  6: "TERMINADOR",
+  7: "MARCAR",
+  8: "TIJOLO",
+  9: "PEDRA",
+  10: "TNT",
+  11: "GELO",
+  12: "MOVER",
+  13: "CIMA",
+  14: "DIREITA",
+  15: "BAIXO",
+  16: "ESQUERDA"
 },
 TERROR: 2,
     EOF: 1,
@@ -752,22 +750,20 @@ TERROR: 2,
     },
 productions_: bp({
   pop: u([
-  18,
+  17,
   s,
-  [19, 13]
+  [18, 9]
 ]),
   rule: u([
   2,
+  2,
   s,
-  [1, 6],
-  5,
+  [5, 4],
   s,
-  [1, 4],
-  3,
-  4
+  [3, 4]
 ])
 }),
-performAction: function parser__PerformAction(yytext, yystate /* action[1] */, yysp, yyvstack) {
+performAction: function parser__PerformAction(yystate /* action[1] */, yysp, yyvstack) {
 
           /* this == yyval */
 
@@ -799,166 +795,112 @@ case 1:
     break;
 
 case 2:
-    /*! Production::    e : DIREITA */
-case 3:
-    /*! Production::    e : ESQUERDA */
-case 4:
-    /*! Production::    e : CIMA */
-case 5:
-    /*! Production::    e : BAIXO */
-
-    this.$ = yyvstack[yysp];
-    break;
-
-case 6:
-    /*! Production::    e : NUMBER */
-
-    {this.$ = Number(yytext);}
-    break;
-
-case 7:
-    /*! Production::    e : RESETAR */
+    /*! Production::    e : RESETAR TERMINADOR */
 
     this.$ = resetarCanvas();
     break;
 
-case 8:
-    /*! Production::    e : MARCAR "(" e ")" TERMINADOR */
+case 3:
+    /*! Production::    e : MARCAR "(" TIJOLO ")" TERMINADOR */
+case 4:
+    /*! Production::    e : MARCAR "(" PEDRA ")" TERMINADOR */
+case 5:
+    /*! Production::    e : MARCAR "(" TNT ")" TERMINADOR */
+case 6:
+    /*! Production::    e : MARCAR "(" GELO ")" TERMINADOR */
 
     this.$ = marcarDraw(yyvstack[yysp - 2]);
     break;
 
+case 7:
+    /*! Production::    e : MOVER CIMA TERMINADOR */
+case 8:
+    /*! Production::    e : MOVER DIREITA TERMINADOR */
 case 9:
-    /*! Production::    e : TIJOLO */
-
-    this.$ = "tijolo";
-    break;
-
+    /*! Production::    e : MOVER BAIXO TERMINADOR */
 case 10:
-    /*! Production::    e : PEDRA */
+    /*! Production::    e : MOVER ESQUERDA TERMINADOR */
 
-    this.$ = "pedra";
-    break;
-
-case 11:
-    /*! Production::    e : TNT */
-
-    this.$ = "tnt";
-    break;
-
-case 12:
-    /*! Production::    e : GELO */
-
-    this.$ = "gelo";
-    break;
-
-case 13:
-    /*! Production::    e : MOVER e TERMINADOR */
-
-    this.$ = canvasDraw(yyvstack[yysp - 1], 1);
-    break;
-
-case 14:
-    /*! Production::    e : MOVER e NUMBER TERMINADOR */
-
-    this.$ = canvasDraw(yyvstack[yysp - 2], yyvstack[yysp - 1]);
+    this.$ = canvasDraw(yyvstack[yysp - 1]);
     break;
 
 }
 },
 table: bt({
   len: u([
-  14,
-  1,
-  1,
+  5,
   s,
-  [0, 6],
-  c,
-  [7, 5],
-  13,
+  [1, 4],
+  4,
   0,
-  13,
-  2,
-  1,
   0,
+  4,
+  s,
+  [1, 8],
+  s,
+  [0, 4],
   c,
-  [19, 4]
+  [8, 8]
 ]),
   symbol: u([
-  s,
-  [5, 7, 1],
-  s,
-  [13, 7, 1],
+  5,
+  7,
+  12,
+  17,
+  18,
   1,
   1,
+  6,
   3,
-  c,
-  [17, 12],
-  19,
-  c,
-  [13, 13],
-  9,
-  12,
-  4,
-  12,
-  12
+  s,
+  [13, 4, 1],
+  s,
+  [8, 4, 1],
+  s,
+  [6, 4],
+  s,
+  [4, 4],
+  s,
+  [6, 4]
 ]),
   type: u([
   s,
-  [2, 12],
+  [2, 3],
   0,
   0,
   1,
   s,
-  [2, 14],
-  0,
-  c,
-  [13, 18]
+  [2, 23]
 ]),
   state: u([
   1,
-  2,
-  17,
-  18
+  2
 ]),
   mode: u([
   s,
-  [1, 43]
+  [1, 26]
 ]),
   goto: u([
   s,
-  [3, 14, 1],
-  c,
-  [14, 12],
-  c,
-  [12, 12],
-  20,
-  19,
-  21,
-  22,
-  23
+  [3, 26, 1]
 ])
 }),
 defaultActions: bda({
   idx: u([
+  6,
+  7,
   s,
-  [3, 6, 1],
+  [17, 4, 1],
   s,
-  [10, 4, 1],
-  15,
-  19,
-  22,
-  23
+  [25, 4, 1]
 ]),
   goto: u([
-  s,
-  [2, 6, 1],
-  s,
-  [9, 4, 1],
   1,
-  13,
-  14,
-  8
+  2,
+  s,
+  [7, 4, 1],
+  s,
+  [3, 4, 1]
 ])
 }),
 parseError: function parseError(str, hash, ExceptionClass) {
@@ -987,7 +929,7 @@ parse: function parse(input) {
     var table = this.table;
     var sp = 0;                         // 'stack pointer': index into the stacks
 
-    var yytext;
+
     
 
 
@@ -998,7 +940,7 @@ parse: function parse(input) {
     var TERROR = this.TERROR;
     var EOF = this.EOF;
     var ERROR_RECOVERY_TOKEN_DISCARD_COUNT = (this.options.errorRecoveryTokenDiscardCount | 0) || 3;
-    var NO_ACTION = [0, 24 /* === table.length :: ensures that anyone using this new state will fail dramatically! */];
+    var NO_ACTION = [0, 29 /* === table.length :: ensures that anyone using this new state will fail dramatically! */];
 
     var lexer;
     if (this.__lexer__) {
@@ -1425,7 +1367,7 @@ parse: function parse(input) {
         stack[sp] = 0;
         ++sp;
 
-        yytext = lexer.yytext;
+
 
 
 
@@ -1545,7 +1487,7 @@ parse: function parse(input) {
 
                 // Pick up the lexer details for the current symbol as that one is not 'look-ahead' any more:
 
-                yytext = lexer.yytext;
+
 
 
                 continue;
@@ -1567,7 +1509,7 @@ parse: function parse(input) {
 
 
 
-                r = this.performAction.call(yyval, yytext, newState, sp - 1, vstack);
+                r = this.performAction.call(yyval, newState, sp - 1, vstack);
 
                 if (typeof r !== 'undefined') {
                     retval = r;
@@ -1957,7 +1899,7 @@ var lexer = function() {
 //
 //   uses yyleng: ..................... false
 //   uses yylineno: ................... false
-//   uses yytext: ..................... true
+//   uses yytext: ..................... false
 //   uses yylloc: ..................... false
 //   uses lexer values: ............... true / true
 //   location tracking: ............... false
@@ -3309,98 +3251,93 @@ EOF: 1,
 
     simpleCaseActionClusters: {
       /*! Conditions:: INITIAL */
-      /*! Rule::       [0-9]+ */
-      1: 9,
-
-      /*! Conditions:: INITIAL */
       /*! Rule::       direita */
-      2: 5,
+      1: 14,
 
       /*! Conditions:: INITIAL */
       /*! Rule::       esquerda */
-      3: 6,
+      2: 16,
 
       /*! Conditions:: INITIAL */
       /*! Rule::       cima */
-      4: 7,
+      3: 13,
 
       /*! Conditions:: INITIAL */
       /*! Rule::       baixo */
-      5: 8,
+      4: 15,
 
       /*! Conditions:: INITIAL */
       /*! Rule::       resetar */
-      6: 10,
+      5: 5,
 
       /*! Conditions:: INITIAL */
       /*! Rule::       marcar */
-      7: 11,
+      6: 7,
 
       /*! Conditions:: INITIAL */
       /*! Rule::       pedra */
-      8: 14,
+      7: 9,
 
       /*! Conditions:: INITIAL */
       /*! Rule::       tijolo */
-      9: 13,
+      8: 8,
 
       /*! Conditions:: INITIAL */
       /*! Rule::       tnt */
-      10: 15,
+      9: 10,
 
       /*! Conditions:: INITIAL */
       /*! Rule::       gelo */
-      11: 16,
+      10: 11,
 
       /*! Conditions:: INITIAL */
       /*! Rule::       mover */
-      12: 17,
+      11: 12,
 
       /*! Conditions:: INITIAL */
       /*! Rule::       \( */
-      13: 3,
+      12: 3,
 
       /*! Conditions:: INITIAL */
       /*! Rule::       \) */
-      14: 4,
+      13: 4,
 
       /*! Conditions:: INITIAL */
       /*! Rule::       ; */
-      15: 12,
+      14: 6,
 
       /*! Conditions:: INITIAL */
       /*! Rule::       $ */
-      16: 1,
+      15: 1,
 
       /*! Conditions:: INITIAL */
       /*! Rule::       . */
-      17: 'INVALID'
+      16: 'INVALID'
     },
 
     rules: [
       /*  0: */  /^(?:\s+)/,
-      /*  1: */  /^(?:\d+)/,
-      /*  2: */  /^(?:direita)/,
-      /*  3: */  /^(?:esquerda)/,
-      /*  4: */  /^(?:cima)/,
-      /*  5: */  /^(?:baixo)/,
-      /*  6: */  /^(?:resetar)/,
-      /*  7: */  /^(?:marcar)/,
-      /*  8: */  /^(?:pedra)/,
-      /*  9: */  /^(?:tijolo)/,
-      /* 10: */  /^(?:tnt)/,
-      /* 11: */  /^(?:gelo)/,
-      /* 12: */  /^(?:mover)/,
-      /* 13: */  /^(?:\()/,
-      /* 14: */  /^(?:\))/,
-      /* 15: */  /^(?:;)/,
-      /* 16: */  /^(?:$)/,
-      /* 17: */  /^(?:.)/
+      /*  1: */  /^(?:direita)/,
+      /*  2: */  /^(?:esquerda)/,
+      /*  3: */  /^(?:cima)/,
+      /*  4: */  /^(?:baixo)/,
+      /*  5: */  /^(?:resetar)/,
+      /*  6: */  /^(?:marcar)/,
+      /*  7: */  /^(?:pedra)/,
+      /*  8: */  /^(?:tijolo)/,
+      /*  9: */  /^(?:tnt)/,
+      /* 10: */  /^(?:gelo)/,
+      /* 11: */  /^(?:mover)/,
+      /* 12: */  /^(?:\()/,
+      /* 13: */  /^(?:\))/,
+      /* 14: */  /^(?:;)/,
+      /* 15: */  /^(?:$)/,
+      /* 16: */  /^(?:.)/
     ],
 
     conditions: {
       'INITIAL': {
-        rules: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+        rules: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
         inclusive: true
       }
     }

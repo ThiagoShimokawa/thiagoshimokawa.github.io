@@ -5,15 +5,15 @@
    
       var canvas; // canvas
       var ctx; // context
-      var cursor_eixo_X = 30; // Posição do cursor no eixo X
-      var cursor_eixo_Y = 30; // Posição do cursor no eixo Y 
+      var cursor_eixo_X = 240; // Posição do cursor no eixo X
+      var cursor_eixo_Y = 240; // Posição do cursor no eixo Y 
       var obstaculos = []; // Array com as coordenadas dos obstaculos.
       const tela_width_X = tela_height_Y = 510;
       const box_X = box_Y = 30; // Deslocamento padrão 30px
       
       /*  Cursor .......................... */
       var imgCursor = new Image();
-      imgCursor.src = "_imagens/mira.fw.png";
+      imgCursor.src = "_imagens/pa.fw.png";
       imgCursor = imgCursor;
 
       /*  Fundo .......................... */
@@ -45,9 +45,9 @@
       function obstaculoPadrao(){
         obstaculos = [
           { x: 150, y: 60, tipo: 'tijolo' },
-          { x: 150, y: 90, tipo: 'tijolo' },
+          { x: 150, y: 90, tipo: 'gelo' },
           { x: 150, y: 120, tipo: 'tijolo' },
-          { x: 150, y: 150, tipo: 'pedra' },
+          { x: 150, y: 150, tipo: 'tnt' },
           { x: 180, y: 150, tipo: 'pedra' }
         ];
       }
@@ -59,8 +59,8 @@
         ctx = canvas.getContext("2d");
          
         setInterval( Atualizar, 10 );
-        obstaculoPadrao();
-        //window.addEventListener('keydown', _controles, true);
+        //obstaculoPadrao();
+        window.addEventListener('keydown', _controles, true);
       }
 
       function desenhaFundo() {
@@ -100,10 +100,8 @@
         obstaculos.push({x: cursor_eixo_X, y: cursor_eixo_Y, tipo: obj})
       }
 
-      function canvasDraw(dir, n){
-        console.log("Entrada: " + dir +" - " + n)
-        if(n > 1)
-          canvasDraw(dir, n-1)
+      function canvasDraw(dir){
+        console.log("Entrada: " + dir)
 
         var msg = function(){
           alert('Ops, vai pra onde ?')
@@ -164,7 +162,8 @@
       function resetarCanvas(){
         $("#entrada").val('');
         cursor_eixo_X = cursor_eixo_Y = 30;
-        obstaculoPadrao();
+        obstaculos = [];
+        //obstaculoPadrao();
       }
 
       function _controles(evt) {
@@ -182,7 +181,7 @@
 
           // Down 
         case 40:
-          canvasDraw('baixo')
+            canvasDraw('baixo');
           break;
 
           // Up 

@@ -45,15 +45,15 @@
                         </nav>
 						
                         <div class="tab-content" id="nav-tabContent">
+                                <button class="btn btn-danger" style="margin-top: -50px; margin-left: 455px; width: 60px;    position: absolute; " id="construir"><i class="fa fa-play" ></i></button> 
                             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                                 
 								<!-- Div vazia em que os blocos vão aparecer.........................-->
-								<div id="blocklyDiv" style="height: 420px; width: 100%;"></div>
+								<div id="blocklyDiv" style="height: 460px; width: 100%;"></div>
                                                 
                                 <xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
                                     <block type="movimeto"></block>
                                     <block type="marcar"></block>
-                                    <block type="inicio"></block>
                                     <block type="tnt"></block>
                                     <block type="tijolo"></block>
                                     <block type="pedra"></block>
@@ -62,7 +62,6 @@
 
                                 <xml xmlns="http://www.w3.org/1999/xhtml" id="workspaceBlocks" style="display:none"></xml>
 
-                                <button class="btn btn-danger" style="margin-top: 2px; width: 189px;" id="construir"><i class="fa fa-caret-square-o-right"></i> Play</button> 
                             </div>
 							
                             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
@@ -115,8 +114,7 @@
     function processarCMD(entrada) {
         if(entrada != ''){
             entrada.forEach(function(cmd) {
-                var resultado = game.parse(cmd);
-                $('#saidaJISON').html(resultado);
+                interpretar(cmd);
         }, this);
         }
     }
@@ -133,14 +131,14 @@
      $(document).ready(function(){
         $("#entrada").focus()
         canvas()
-        $("#entrada").keypress(ref=>{
+        /*$("#entrada").keypress(ref=>{
             if(ref.which == 13) {
                try{
                    var c = $("#entrada").val().toLowerCase().split('\n')
                    interpretar(c[c.length-1]); 
                }catch(e){}
             }
-        })
+        })*/
 
         $("#limparConsole").click(()=>{
             $('#entrada').val('')
@@ -150,7 +148,6 @@
             //AQUI DENTRO PODE CHAMAR UMA FUNÇÃO DO ARQUIVO BLOCOS.JS EM SEGUIDA "LER" OS COMANDOS DOS BLOCOS E APÓS USAR A GRÁMATICA PRA DESENHAR
             var cmd = $("#entrada").val().toLowerCase().split('\n')
             processarCMD(cmd);
-            console.log("play")
         })
      });
  </script>
