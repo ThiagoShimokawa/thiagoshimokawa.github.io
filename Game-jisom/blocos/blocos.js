@@ -13,7 +13,7 @@
     horizontalLayout : false, 
     toolboxPosition : 'start', 
     css : true, 
-    media : '_blocos/media/', 
+    media : 'blocos/media/', 
     rtl : false, 
     scrollbars : false, 
     sounds : true, 
