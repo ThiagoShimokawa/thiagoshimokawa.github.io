@@ -1,11 +1,11 @@
 @charset "UTF-8";
 @font-face{
   font-family: 'FonteLogo';
-  src: url("../_fonts/TRANSISTOR215.TTF");
+  src: url("../fonts/TRANSISTOR215.TTF");
 }
 @font-face{
   font-family: 'FonteMsDos';
-  src: url("../_fonts/FSEX300.ttf");
+  src: url("../fonts/FSEX300.ttf");
 }
 
 body{
