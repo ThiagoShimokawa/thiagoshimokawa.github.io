@@ -17,6 +17,8 @@
     <script src="blocos/blockscompressed.js"> </script> 
     <script src="blocos/javascriptcompressed.js"></script>
     <script src="blocos/pt-br.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>
  <body>
     <div class="container" id="interface">
@@ -129,6 +131,13 @@
         }
     }
 }
+
+    $(document).keydown(function(evt) {
+        var key = evt.keyCode;
+        if (key === 38 || key === 40) {
+        return false;
+        }
+    });
 
      $(document).ready(function(){
         $("#entrada").focus()

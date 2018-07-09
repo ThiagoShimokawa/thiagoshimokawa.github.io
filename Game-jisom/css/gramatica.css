@@ -24,6 +24,12 @@
   font-size: 11px;
   text-align: right;
 }
+/*body
+{
+  font: normal 12px Verdana, sans-serif;
+  color: #0F0C00;
+  background: #FFFCF0;
+}*/
 a:link, a:visited
 {
   color: #0F0C00;
